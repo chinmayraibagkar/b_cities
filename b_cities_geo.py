@@ -214,7 +214,6 @@ st.session_state.end_date = date_range[1].strftime("%Y-%m-%d")
 
 st.session_state.campaign_data = get_kw_data(client,"9680382253", st.session_state.start_date, st.session_state.end_date)
 st.session_state.campaign_data = pd.concat([st.session_state.campaign_data, get_kw_data(client,"4840834180", st.session_state.start_date, st.session_state.end_date)], ignore_index=True)
-st.dataframe(st.session_state.campaign_data)
 
 geo_acq_mapped = st.session_state.campaign_data.copy()
 
@@ -224,7 +223,7 @@ mapping_ref["Campaign ID"] = mapping_ref["Campaign ID"].astype(str)
 st.session_state.campaign_data["Campaign Name"] = st.session_state.campaign_data["Campaign Name"].str.strip()
 st.session_state.campaign_data = st.session_state.campaign_data.merge(mapping_ref, how="inner", left_on="Campaign Name", right_on="Campaign")
 st.session_state.campaign_data = st.session_state.campaign_data[["Date","Campaign ID_y" ,"Campaign Name", "City", "Category", "Cost"]]
-
+st.dataframe(st.session_state.campaign_data)
 
 metacard_2w_spot = st.file_uploader("Upload a 2W and Spot Metacard CSV", type=["csv"])
 metacard_uac = st.file_uploader("Upload a UAC Metacard CSV", type=["csv"])
