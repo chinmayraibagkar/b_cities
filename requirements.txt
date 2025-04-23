@@ -7,3 +7,4 @@ gspread
 plotly
 plotly-express
 datetime
+chardet
