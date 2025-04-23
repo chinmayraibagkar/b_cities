@@ -8,6 +8,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from google.oauth2.credentials import Credentials
 import tempfile
 import json
+import chardet
 
 def get_google_ads_client():
     # Get credentials from Streamlit secrets
@@ -229,8 +230,11 @@ metacard_2w_spot = st.file_uploader("Upload a 2W and Spot Metacard CSV", type=["
 metacard_uac = st.file_uploader("Upload a UAC Metacard CSV", type=["csv"])
 metacard_uace = st.file_uploader("Upload a UACE Metacard CSV", type=["csv"])
 
+with open(metacard_2w_spot, 'rb') as f:
+    result = chardet.detect(f.read())
+
 if metacard_2w_spot and metacard_uac and metacard_uace is not None:
-    st.session_state.metacard_2w_spot = pd.read_csv(metacard_2w_spot, encoding='latin1')
+    st.session_state.metacard_2w_spot = pd.read_csv(metacard_2w_spot, encoding=result['encoding'])
     st.session_state.metacard_uac = pd.read_csv(metacard_uac)
     st.session_state.metacard_uace = pd.read_csv(metacard_uace)
 
