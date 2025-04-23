@@ -232,9 +232,7 @@ metacard_uace = st.file_uploader("Upload a UACE Metacard CSV", type=["csv"])
 
 
 if metacard_2w_spot and metacard_uac and metacard_uace is not None:
-    with open(metacard_2w_spot, 'rb') as f:
-        result = chardet.detect(f.read())
-    st.session_state.metacard_2w_spot = pd.read_csv(metacard_2w_spot, encoding=result['encoding'])
+    st.session_state.metacard_2w_spot = pd.read_csv(metacard_2w_spot)
     st.session_state.metacard_uac = pd.read_csv(metacard_uac)
     st.session_state.metacard_uace = pd.read_csv(metacard_uace)
 
